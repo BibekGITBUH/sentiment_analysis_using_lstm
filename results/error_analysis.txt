@@ -1,0 +1,65 @@
+======================================================================
+ERROR ANALYSIS REPORT
+======================================================================
+Total examples: 1149
+Correct: 913  |  Incorrect: 236
+Overall accuracy: 0.7946
+
+-- Confusion pairs (true -> predicted), most frequent first --
+   negative -> positive  : 118 errors
+   positive -> negative  : 93 errors
+    neutral -> negative  : 10 errors
+    neutral -> positive  : 9 errors
+   negative -> neutral   : 3 errors
+   positive -> neutral   : 3 errors
+
+-- Token-length comparison: correct vs incorrect predictions --
+              mean  median       std  count
+correct                                    
+False    10.851695    10.0  5.427985    236
+True     10.667032    10.0  4.622217    913
+
+Interpretation: if the mean length for incorrect predictions is
+notably higher/lower than for correct ones, sentence length is
+likely correlated with model errors (e.g. very short or very long
+reviews may lack/contain enough signal for the LSTM's fixed context).
+
+-- Sample misclassified examples (up to 5 per true/pred pair) --
+  [true=negative, pred=neutral] all i can say is fuhgeddaboutit.
+  [true=negative, pred=neutral] they should have called it gutterball.
+  [true=negative, pred=neutral] do you say " hi " to your lover when you wake up in the morning?
+  [true=negative, pred=positive] it's at once laughable and compulsively watchable, in its committed dumbness.
+  [true=negative, pred=positive] gaghan captures the half-lit, sometimes creepy intimacy of college dorm rooms, a subtlety that makes the silly, over-the-top coda especially disappointing.
+  [true=negative, pred=positive] there's only one way to kill michael myers for good: stop buying tickets to these movies.
+  [true=negative, pred=positive] may offend viewers not amused by the sick sense of humor.
+  [true=negative, pred=positive] a cumbersome and cliche-ridden movie greased with every emotional device known to man.
+  [true=neutral, pred=negative] " But Tenneco would be a challenge to run because of its sheer size and diversity.
+  [true=neutral, pred=negative] As far as it knows, the ingredient has not been tested in a spermicide.
+  [true=neutral, pred=negative] An attorney for Ammeen, who is named as a defendant, asked the court to dismiss the lawsuit against his client.
+  [true=neutral, pred=negative] The bus stop is around the corner.
+  [true=neutral, pred=negative] Chase Manhattan has branches in Milan and Rome.
+  [true=neutral, pred=positive] " We appreciate his management, but certainly some practices have to be corrected."
+  [true=neutral, pred=positive] The unit delivers mainly to the car industry.
+  [true=neutral, pred=positive] The Bass family holds an 11.
+  [true=neutral, pred=positive] The SEC has a standing policy of never confirming or denying investigations or upcoming legal action.
+  [true=neutral, pred=positive] The bid is conditional upon an examination by Gordon of the business and affairs of Pagecorp during the 45 days ending December 3, 1987.
+  [true=positive, pred=negative] the whole cast looks to be having so much fun with the slapstick antics and silly street patois, tossing around obscure expressions like bellini and mullinski, 
+  [true=positive, pred=negative] asia authors herself as anna battista, an italian superstar and aspiring directress who just happens to be her own worst enemy.
+  [true=positive, pred=negative] neil burger here succeeded in... making the mystery of four decades back the springboard for a more immediate mystery in the present.
+  [true=positive, pred=negative] on the surface a silly comedy, scotland, pa would be forgettable if it weren't such a clever adaptation of the bard's tragic play.
+  [true=positive, pred=negative] may lack the pungent bite of its title, but it's an enjoyable trifle nonetheless.
+  [true=positive, pred=neutral] I love this product.
+  [true=positive, pred=neutral] This is a lovely house.
+  [true=positive, pred=neutral] trades run-of-the-mill revulsion for extreme unease.
+
+-- Common error themes to check manually --
+  * Neutral vs positive/negative confusion: neutral is the hardest
+    class since it lacks strong polarity words; check if the model
+    is biased toward predicting positive/negative for neutral text.
+  * Negation handling: look for misclassified examples containing
+    'not', 'never', "n't" - LSTMs need enough training signal to
+    learn that negation flips polarity.
+  * Sarcasm / mixed sentiment: sentences with both positive and
+    negative cues are a common source of error for both models.
+  * OOV / rare words: words absent from the embedding vocabulary
+    fall back to the <UNK> vector and lose sentiment signal.
