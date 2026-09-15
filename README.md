@@ -142,15 +142,30 @@ Trained artifacts are written to `models/`:
 
 
 
+#
+# Images of the Note — To Whom It May Concern
+
+![alt text](<WhatsApp Image 2026-09-15 at 9.37.10 PM.jpeg>) ![alt text](<WhatsApp Image 2026-09-15 at 9.37.10 PM (4).jpeg>) ![alt text](<WhatsApp Image 2026-09-15 at 9.37.26 PM (2).jpeg>) ![alt text](<WhatsApp Image 2026-09-15 at 9.37.26 PM (3).jpeg>)
 
 
-
-
-
-
-
-
-
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
 ```
 
 D:\Projects_on_Python\sentiment_analysis_system\sentiment_analysis_system (1)\sentiment_analysis>python -m nltk.downloader sentence_polarity reuters
